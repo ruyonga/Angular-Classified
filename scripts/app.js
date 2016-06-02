@@ -1,13 +1,27 @@
 angular
- 	.module("ngClassifieds", ["ngMaterial"])
- 	.config(function($mdThemingProvider) {
+ 	.module("ngClassifieds", ["ui.router","ngMaterial"])
+ 	.config(function($stateProvider,$mdThemingProvider) {
  		
  			$mdThemingProvider.theme('default')
  				.primaryPalette('teal')
  				.accentPalette('orange');
 
- 	}).directive("helloWorld", function(){
- 		return{
- 			template: "<h1>{{ message }}</h1>"
- 		}
- 	});
+            //states
+ 			$stateProvider
+ 			 	.state('classifieds',{
+ 			 		url: '/classifieds',
+ 			 		templateUrl: 'components/classifieds/classifieds.tpl.html',
+ 			 		controller: 'classfiedsCtrl as vm'
+ 			 	})
+ 			 	.state('classifieds.new',{
+ 			 		url: '/new',
+ 			 		templateUrl: 'components/classifieds/new/classifieds.new.tpl.html',
+ 			 		controller: 'newClassifiedCtrl as vm'
+ 			 	})
+ 			
+	});
+
+	// .controller('stateOneCtrl',function(){
+	// 	var vm = this;
+	// 	vm.message = "Hey from state one";
+	// });

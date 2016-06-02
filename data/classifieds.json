@@ -1,14 +1,7 @@
-(function() {
-	"use strict";
-
-	angular
-		.module('ngClassifieds')
-		.controller('classfiedsCtrl', function($scope){
-			
-			$scope.classifieds = [
+[
 			{
 				"id":"1",
-				"title": "20 Foot Equipemtnt Trailer",
+				"title": "Vehicles",
 				"price": "6000",
 				"posted": "2015-10-24",
 				"contact":{
@@ -25,7 +18,7 @@
 			},
 			{
 				"id":"2",
-				"title": "20 Foot Equipemtnt Trailer",
+				"title": "cars",
 				"price": "6000",
 				"posted": "2015-10-24",
 				"contact":{
@@ -42,7 +35,7 @@
 			},
 			{
 				"id":"3",
-				"title": "20 Foot Equipemtnt Trailer",
+				"title": "Boat",
 				"price": "6000",
 				"posted": "2015-10-24",
 				"contact":{
@@ -92,7 +85,7 @@
 			},
 			{
 				"id":"6",
-				"title": "20 Foot Equipemtnt Trailer",
+				"title": "Baller",
 				"price": "6000",
 				"posted": "2015-10-24",
 				"contact":{
@@ -108,7 +101,4 @@
 				"description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip excillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 			}
 
-			];
-		});
-
-})();
+			]
