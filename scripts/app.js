@@ -13,10 +13,17 @@ angular
  			 		templateUrl: 'components/classifieds/classifieds.tpl.html',
  			 		controller: 'classfiedsCtrl as vm'
  			 	})
+ 			 	//create new product route
  			 	.state('classifieds.new',{
  			 		url: '/new',
  			 		templateUrl: 'components/classifieds/new/classifieds.new.tpl.html',
  			 		controller: 'newClassifiedCtrl as vm'
+ 			 	})
+ 			 	//edit prouct to edit toute
+ 			.state('classifieds.edit',{
+ 			 		url: '/edit',
+ 			 		templateUrl: 'components/classifieds/edit/classifieds.edit.tpl.html',
+ 			 		controller: 'editClassifiedCtrl as vm'
  			 	})
  			
 	});
