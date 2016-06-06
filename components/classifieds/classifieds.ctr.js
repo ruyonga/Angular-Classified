@@ -1,115 +1,116 @@
-(function() {
-	"use strict";
+(function () {
+    "use strict";
 
-	angular
-	.module('ngClassifieds')
-	.controller('classfiedsCtrl', function($scope, $state, $http, classifiedsFactory, $mdSidenav, $mdToast, $mdDialog){   //inject the service in the controller to create the connection between the service and controller
+    angular
+        .module('ngClassifieds')
+        .controller('classfiedsCtrl', function ($scope, $state, $http, classifiedsFactory, $mdSidenav, $mdToast, $mdDialog) {   //inject the service in the controller to create the connection between the service and controller
 
-		var vm = this;
+            var vm = this;
 
-			// $scope.$on;      //respond to messages
-			// $scope.$broadcast;   //send data to child controllers
-			// $scope.$emit // send data to parant class
-
-
-			vm.openSidebar = openSidebar;
-			vm.closeSidebar = closeSidebar;
-			vm.saveClassified = saveClassified;
-			vm.editClassified = editClassified;
-			vm.saveEdit = saveEdit; 
-			vm.deleteClassified = deleteClassified;
-			vm.cateogries;
-			vm.classifieds;
-			vm.editing;
-			vm.classified;
+            // $scope.$on;      //respond to messages
+            // $scope.$broadcast;   //send data to child controllers
+            // $scope.$emit // send data to parant class
 
 
-
-		// $http.get('data/classifieds.json').then(function(classifieds){    ==better to user services
-			classifiedsFactory.getClassifieds().then(function (classifieds) {
-				vm.classifieds = classifieds.data;
-			//vm.cateogries = getCategories(vm.classified);
-			//console.log(classifieds.data);
-			}) ; //promises ===used to handle asyncs
-
-
-				//Saving  on emit 
-	$scope.$on('newClassified', function(event, classified){
-		classified.id = vm.classifieds.length + 1;
-		vm.classifieds.push(classified);
-		showToast('classified saved');
-	})
+            vm.openSidebar = openSidebar;
+            vm.closeSidebar = closeSidebar;
+            vm.saveClassified = saveClassified;
+            vm.editClassified = editClassified;
+            vm.saveEdit = saveEdit;
+            vm.deleteClassified = deleteClassified;
+            vm.cateogries;
+            vm.classifieds;
+            vm.editing;
+            vm.classified;
 
 
-	var contact = {
-		name: "Ruyonga daniel",
-		phone: "078899000",
-		email: "druyonga@gmail.com"
-	}
+            // $http.get('data/classifieds.json').then(function(classifieds){    ==better to user services
+            classifiedsFactory.getClassifieds().then(function (classifieds) {
+                vm.classifieds = classifieds.data;
+                //vm.cateogries = getCategories(vm.classified);
+                //console.log(classifieds.data);
+            }); //promises ===used to handle asyncs
 
 
+            //Saving  on emit
+            $scope.$on('newClassified', function (event, classified) {
+                classified.id = vm.classifieds.length + 1;
+                vm.classifieds.push(classified);
+                showToast('classified saved');
+            })
 
 
-			//open the sidebar
-			function openSidebar(){
-				// body...
-				//$mdSidenav('left').open();
-				$state.go('classifieds.new');
-			}
+            var contact = {
+                name: "Ruyonga daniel",
+                phone: "078899000",
+                email: "druyonga@gmail.com"
+            }
 
-			//close the side bar
-			function closeSidebar() {
-				// body...
-				$mdSidenav('left').close();
-			}
-			//save to json to the data
-			function saveClassified(classified) {
-				// body...
-				if(classified){ 
-					classified.contact =  contact;   //append the contact object before savings
-					vm.classifieds.push(classified);
-					vm.classified = {};
-					closeSidebar();
-					
 
-				}
-			} // end savign scope
+            //open the sidebar
+            function openSidebar() {
+                // body...
+                //$mdSidenav('left').open();
+                $state.go('classifieds.new');
+            }
 
-			//Editing classified
-			function editClassified(classified){
+            //close the side bar
+            function closeSidebar() {
+                // body...
+                $mdSidenav('left').close();
+            }
 
-			 	$state.go('classifieds.edit');
-			}
+            //save to json to the data
+            function saveClassified(classified) {
+                // body...
+                if (classified) {
+                    classified.contact = contact;   //append the contact object before savings
+                    vm.classifieds.push(classified);
+                    vm.classified = {};
+                    closeSidebar();
 
-			function  saveEdit(){
-				vm.editing = false;
-				vm.classified = {}
-				closeSidebar();
-				showToast("Edit classified saved");
-			}
 
-			function  deleteClassified(event,classified){
-				var confirm = $mdDialog.comfirm()
-				.title('Are you sure you want to delete'+ classified.title +'?')
-				.ok('Yes')
-				.cancel('No')
-				.targetEvent(event);
-				$mdDialog.show(comfirm).then(function (){
-					var index = $scope.classifieds.indexOf(classified);
-					vm.classifieds.splice(index,1);
-				}, function(){
+                }
+            } // end savign scope
 
-				});
+            //Editing classified
+            function editClassified(classified) {
 
-			}
+                $state.go('classifieds.edit',{
+                    id: classified.id,
+                    classified: classified
+                });
+            }
 
-			function showToast(message){
-				$mdToast.show(
-					$mdToast.simple()
-					.content(message)
-					.position('top, right')
-					.hideDelay(3000)
-					);
-			}
-		});
+            function saveEdit() {
+                vm.editing = false;
+                vm.classified = {}
+                closeSidebar();
+                showToast("Edit classified saved");
+            }
+
+            function deleteClassified(event, classified) {
+                var confirm = $mdDialog.comfirm()
+                    .title('Are you sure you want to delete' + classified.title + '?')
+                    .ok('Yes')
+                    .cancel('No')
+                    .targetEvent(event);
+                $mdDialog.show(comfirm).then(function () {
+                    var index = $scope.classifieds.indexOf(classified);
+                    vm.classifieds.splice(index, 1);
+                }, function () {
+
+                });
+
+            }
+
+            function showToast(message) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content(message)
+                        .position('top, right')
+                        .hideDelay(3000)
+                );
+            }
+        });
 })();
